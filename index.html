@@ -303,7 +303,7 @@
 			 title: "Hello BOM",
 			 content: "Try resizing the window → watch width/height update!"
 			 });
-			 
+
 			 notes.push({
 			 id: nextId++,
 			 title: "Delete me",
@@ -312,6 +312,15 @@
 			 renderNotes();
 			 }
 		}
+
+		function init() {
+			 addSampleNotes(); // populate demo notes
+			 updateWindowSize(); // BOM: show current size
+			 showUserAgent(); // BOM: show user agent
+			 addBtn.addEventListener("click", addNote);
+			 clearAllBtn.addEventListener("click", clearAllNotes);
+		}
+		init();
 	</script>
 
 </body>
