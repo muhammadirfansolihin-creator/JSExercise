@@ -172,18 +172,49 @@
 			while (notesContainer.firstChild){
 				notesContainer.removeChild(notesContainer.firstChild);
 			}
+
+			if (notes.length === 0) {
+			 const emptyMsg = document.createElement("div");
+			 emptyMsg.textContent = "📭 No notes yet. Add your first note!";
+			 emptyMsg.style.color = "#94a3b8";
+			 emptyMsg.style.textAlign = "center";
+			 emptyMsg.style.padding = "1rem";
+			 notesContainer.appendChild(emptyMsg);
+			 updateCounter();
+			 return;
+			}
+
+			notes.forEach (note =>{
+				const noteDiv = document.createElement("div");
+				noteDiv.classList.add("note-item");
+				noteDiv.setAttribute("data-id", note.id);
+				
+				const titleDiv = document.createElement("div");
+				titleDiv.classList.add("note-title");
+
+				const titleSpan = document.createElement("span");
+				titleSpan.textContent = note.title;
+
+				const deleteBtn = document.createElement("button");
+				deleteBtn.textContent = "🗑 Delete"; 
+				deleteBtn.classList.add("delete-note");
+				deleteBtn.setAttribute("data-action", "delete");
+				deleteBtn.setAttribute("data-id", note.id);
+				titleDiv.appendChild(titleSpan);
+				titleDiv.appendChild(deleteBtn);
+
+				const contentP = document.createElement("p");
+				contentP.classList.add("note-content");
+				contentP.textContent = note.content || "(no additional content)";
+
+				noteDiv.appendChild(titleDiv);
+				noteDiv.appendChild(contentP);
+				notesContainer.appendChild(noteDiv);
+			})
+			updateCounter();
 		}
 
-		if (notes.length === 0) {
-		 const emptyMsg = document.createElement("div");
-		 emptyMsg.textContent = "📭 No notes yet. Add your first note!";
-		 emptyMsg.style.color = "#94a3b8";
-		 emptyMsg.style.textAlign = "center";
-		 emptyMsg.style.padding = "1rem";
-		 notesContainer.appendChild(emptyMsg);
-		 updateCounter();
-		 return;
-		}
+		
 	</script>
 
 </body>
